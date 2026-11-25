@@ -1,0 +1,24 @@
+{
+  "overview": "TableFlow is a French-first booking and guest management back office for independent restaurants and spas, with a public booking page guests can use without an account.",
+  "features": [
+    "Sign in and manage a venue with owner, manager and staff roles",
+    "Four-step venue setup with opening hours, booking defaults and a unique public link",
+    "Restaurant planning with service tabs, covers counters, list and timeline views",
+    "Automatic table suggestion and protection against double bookings",
+    "Public booking page with waitlist fallback and a guest self-service manage page",
+    "Guest CRM with search, filters, automatic tags, merge, CSV import and export",
+    "Floor plan editor and a live tablet floor view",
+    "Email confirmations and reminders for bookings",
+    "French and English interface with a seeded demo restaurant"
+  ],
+  "category": "booking-and-reservations",
+  "tags": [
+    "restaurant",
+    "hospitality",
+    "bookings",
+    "crm",
+    "floor-plan",
+    "multi-tenant"
+  ],
+  "last_updated": "2026-11-25T11:13:30.602Z"
+}

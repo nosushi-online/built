@@ -1,0 +1,677 @@
+type Weekday = nat;
+type VenueType = 
+ variant {
+   restaurant;
+   spa;
+ };
+type VenueTexts = 
+ record {
+   description: text;
+   language: Language;
+   name: text;
+ };
+type VenueId = nat;
+type Venue = 
+ record {
+   address: text;
+   bookingDefaults: BookingDefaults;
+   closures: vec ClosureDate;
+   createdAt: Timestamp;
+   id: VenueId;
+   logo: opt text;
+   name: text;
+   onboarding: OnboardingState;
+   openingHours: vec DayHours;
+   phone: text;
+   publicSlug: text;
+   texts: vec VenueTexts;
+   timezone: Timezone;
+   venueType: VenueType;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UpdateVenueInput = 
+ record {
+   address: opt text;
+   bookingDefaults: opt BookingDefaults;
+   logo: opt text;
+   name: opt text;
+   phone: opt text;
+   texts: opt vec VenueTexts;
+   timezone: opt text;
+   venueType: opt VenueType;
+ };
+type Timezone = text;
+type Timestamp = int;
+type TemplateKind = 
+ variant {
+   cancellation;
+   confirmation;
+   modification;
+   reminder;
+ };
+type TemplateId = nat;
+type TeamRole = 
+ variant {
+   manager;
+   owner;
+   staff;
+ };
+type TeamMember = 
+ record {
+   email: text;
+   joinedAt: Timestamp;
+   "principal": principal;
+   role: TeamRole;
+   venueId: VenueId;
+ };
+type TeamInvite = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   invitedBy: principal;
+   role: TeamRole;
+   venueId: VenueId;
+ };
+type TableUpdate = 
+ record {
+   active: opt bool;
+   combinable: opt bool;
+   maxSeats: opt nat;
+   minSeats: opt nat;
+   name: opt text;
+   position: opt FloorPosition;
+   room: opt text;
+ };
+type TableStatus = 
+ variant {
+   booked;
+   finished;
+   free;
+   seated;
+ };
+type TableShape = 
+ variant {
+   rectangle;
+   round;
+   square;
+ };
+type TableInput = 
+ record {
+   combinable: bool;
+   maxSeats: nat;
+   minSeats: nat;
+   name: text;
+   position: FloorPosition;
+   room: text;
+ };
+type TableId = nat;
+type StatusHistoryEntry = 
+ record {
+   at: Timestamp;
+   by: opt principal;
+   status: BookingStatus;
+ };
+type Slot = 
+ record {
+   endAt: Timestamp;
+   startAt: Timestamp;
+ };
+type ServiceWindow = 
+ record {
+   closeMinute: nat;
+   openMinute: nat;
+ };
+type SendResult = 
+ variant {
+   err: text;
+   ok;
+ };
+type RoomTable = 
+ record {
+   active: bool;
+   combinable: bool;
+   id: TableId;
+   maxSeats: nat;
+   minSeats: nat;
+   name: text;
+   position: FloorPosition;
+   room: text;
+   venueId: VenueId;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ReminderLog = 
+ record {
+   bookingId: BookingId;
+   sentSlots: vec text;
+ };
+type PublicVenuePage = 
+ record {
+   address: text;
+   closedDates: vec text;
+   defaultTableDurationMinutes: nat;
+   description: text;
+   logo: opt text;
+   maxOnlinePartySize: nat;
+   name: text;
+   openingHours: vec DayHours;
+   phone: text;
+   services: vec ServiceWindow;
+   timezone: Timezone;
+   venueId: VenueId;
+ };
+type PublicManageView = 
+ record {
+   canCancel: bool;
+   canModify: bool;
+   endAt: Timestamp;
+   guestName: text;
+   notes: opt text;
+   partySize: nat;
+   startAt: Timestamp;
+   status: BookingStatus;
+   venueName: text;
+ };
+type PublicBookingResult = 
+ variant {
+   confirmed: record {
+                cancelToken: text;
+                endAt: Timestamp;
+                startAt: Timestamp;
+              };
+   unavailable: record {message: text;};
+   waitlisted: record {message: text;};
+ };
+type PrivacyExport = 
+ record {
+   bookings: vec Booking;
+   guest: Guest;
+   json: text;
+ };
+type OnboardingState = 
+ record {
+   bookingDefaultsDone: bool;
+   completedAt: opt Timestamp;
+   hoursDone: bool;
+   slugDone: bool;
+   venueTypeDone: bool;
+ };
+type OnboardingPatch = 
+ record {
+   bookingDefaultsDone: opt bool;
+   hoursDone: opt bool;
+   slugDone: opt bool;
+   venueTypeDone: opt bool;
+ };
+type ModifyInput = 
+ record {
+   guestEmail: opt text;
+   guestName: opt text;
+   guestPhone: opt text;
+   notes: opt text;
+   partySize: opt nat;
+   startAt: opt Timestamp;
+   tableId: opt TableId;
+ };
+type MergeResult = 
+ record {
+   kept: Guest;
+   mergedBookings: nat;
+ };
+type Language = 
+ variant {
+   en;
+   fr;
+ };
+type ImportResult = 
+ record {
+   imported: nat;
+   skipped: nat;
+ };
+type GuestProfile = 
+ record {
+   bookings: vec Booking;
+   guest: Guest;
+ };
+type GuestInput = 
+ record {
+   allergies: opt text;
+   email: opt text;
+   marketingOptIn: bool;
+   name: text;
+   notes: opt text;
+   phone: text;
+   preferences: opt text;
+   tags: vec text;
+   vip: bool;
+ };
+type GuestId = nat;
+type GuestFilters = 
+ record {
+   hasAllergies: bool;
+   lastVisitBefore: opt Timestamp;
+   minVisits: opt nat;
+   optInOnly: bool;
+   search: opt text;
+   tags: vec text;
+   vipOnly: bool;
+ };
+type GuestError = 
+ variant {
+   invalidInput: text;
+   notAuthorized;
+   notFound;
+ };
+type Guest = 
+ record {
+   allergies: opt text;
+   createdAt: Timestamp;
+   email: opt text;
+   id: GuestId;
+   lastVisitAt: opt Timestamp;
+   marketingOptIn: bool;
+   marketingOptInAt: opt Timestamp;
+   name: text;
+   noShowCount: nat;
+   notes: opt text;
+   phone: text;
+   preferences: opt text;
+   tags: vec text;
+   venueId: VenueId;
+   vip: bool;
+   visitCount: nat;
+ };
+type FloorView = 
+ record {
+   date: text;
+   "service": text;
+   tables: vec FloorTable;
+   venueId: VenueId;
+ };
+type FloorTable = 
+ record {
+   booking: opt Booking;
+   status: TableStatus;
+   table: RoomTable;
+ };
+type FloorPosition = 
+ record {
+   height: nat;
+   rotation: nat;
+   shape: TableShape;
+   width: nat;
+   x: nat;
+   y: nat;
+ };
+type FloorPlan = 
+ record {
+   tables: vec RoomTable;
+   venueId: VenueId;
+ };
+type FloorError = 
+ variant {
+   invalidInput: text;
+   notAuthorized;
+   notFound: TableId;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type EmailTemplate = 
+ record {
+   body: text;
+   id: TemplateId;
+   kind: TemplateKind;
+   language: Language;
+   subject: text;
+   venueId: VenueId;
+ };
+type DayHours = 
+ record {
+   services: vec ServiceWindow;
+   weekday: Weekday;
+ };
+type CreateVenueInput = 
+ record {
+   address: text;
+   bookingDefaults: opt BookingDefaults;
+   logo: opt text;
+   name: text;
+   phone: text;
+   publicSlug: text;
+   texts: vec VenueTexts;
+   timezone: opt text;
+   venueType: VenueType;
+ };
+type CreateInput = 
+ record {
+   guestEmail: opt text;
+   guestName: text;
+   guestPhone: text;
+   notes: opt text;
+   partySize: nat;
+   source: BookingSource;
+   startAt: Timestamp;
+   tableId: opt TableId;
+ };
+type ColumnMapping = 
+ record {
+   allergies: opt nat;
+   email: opt nat;
+   marketingOptIn: opt nat;
+   name: nat;
+   notes: opt nat;
+   phone: nat;
+   preferences: opt nat;
+   tags: opt nat;
+   vip: opt nat;
+ };
+type ClosureDate = 
+ record {
+   date: text;
+   reason: opt text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BookingView = 
+ record {
+   cancelToken: text;
+   createdAt: Timestamp;
+   endAt: Timestamp;
+   guestEmail: opt text;
+   guestId: GuestId;
+   guestName: text;
+   guestPhone: text;
+   id: BookingId;
+   notes: opt text;
+   partySize: nat;
+   source: BookingSource;
+   startAt: Timestamp;
+   status: BookingStatus;
+   statusHistory: vec StatusHistoryEntry;
+   tableId: opt TableId;
+   tableName: opt text;
+   venueId: VenueId;
+ };
+type BookingStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   finished;
+   noShow;
+   pending;
+   seated;
+ };
+type BookingSource = 
+ variant {
+   online;
+   phone;
+   staff;
+   walkIn;
+ };
+type BookingId = nat;
+type BookingError = 
+ variant {
+   invalidInput: text;
+   invalidStatus;
+   notAuthorized;
+   notFound;
+   pastCutoff;
+   slotUnavailable;
+ };
+type BookingDefaults = 
+ record {
+   defaultTableDurationMinutes: nat;
+   maxOnlinePartySize: nat;
+   spaDefaultBufferMinutes: nat;
+ };
+type Booking = 
+ record {
+   cancelToken: text;
+   createdAt: Timestamp;
+   endAt: Timestamp;
+   guestId: GuestId;
+   id: BookingId;
+   notes: opt text;
+   partySize: nat;
+   source: BookingSource;
+   startAt: Timestamp;
+   status: BookingStatus;
+   statusHistory: vec StatusHistoryEntry;
+   tableId: opt TableId;
+   venueId: VenueId;
+ };
+type Availability = 
+ record {
+   date: text;
+   slots: vec Slot;
+ };
+type AuditId = nat;
+type AuditEntry = 
+ record {
+   action: text;
+   actorPrincipal: principal;
+   after: opt text;
+   at: Timestamp;
+   before: opt text;
+   entity: text;
+   id: AuditId;
+   venueId: VenueId;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  acceptInvite: (email: text) -> (TeamMember);
+  addClosure: (venueId: VenueId, closure: ClosureDate) -> (vec ClosureDate);
+  /// Anonymize a guest record (owner or manager only).
+  anonymizeGuest: (guestId: GuestId) ->
+   (variant {
+      err: GuestError;
+      ok: Guest;
+    });
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  cancelPublicBooking: (token: text) ->
+   (variant {
+      err: BookingError;
+      ok: PublicManageView;
+    });
+  changeBookingStatus: (bookingId: BookingId, status: BookingStatus) ->
+   (variant {
+      err: BookingError;
+      ok: BookingView;
+    });
+  changeMemberRole: (venueId: VenueId, target: principal, role: TeamRole) ->
+   (TeamMember);
+  createBooking: (input: CreateInput) ->
+   (variant {
+      err: BookingError;
+      ok: BookingView;
+    });
+  /// Create a guest in the caller's venue.
+  createGuest: (input: GuestInput) -> (variant {
+                                         err: GuestError;
+                                         ok: Guest;
+                                       });
+  createPublicBooking: (slug: text, guestName: text, guestPhone: text,
+   guestEmail: opt text, partySize: nat, startAt: Timestamp, notes: opt text,
+   honeypot: text) -> (PublicBookingResult);
+  /// Create a table in the caller's venue (owner or manager only).
+  createTable: (input: TableInput) ->
+   (variant {
+      err: FloorError;
+      ok: RoomTable;
+    });
+  createVenue: (input: CreateVenueInput) -> (Venue);
+  /// Deactivate a table of the caller's venue (owner or manager only).
+  deactivateTable: (tableId: TableId) ->
+   (variant {
+      err: FloorError;
+      ok: RoomTable;
+    });
+  /// Delete a guest record (owner or manager only).
+  deleteGuest: (guestId: GuestId) -> (variant {
+                                        err: GuestError;
+                                        ok;
+                                      });
+  /// Delete a table of the caller's venue (owner or manager only).
+  deleteTable: (tableId: TableId) -> (variant {
+                                        err: FloorError;
+                                        ok;
+                                      });
+  execute: (qJson: text) -> (Result) query;
+  /// Export one guest's data as JSON (GDPR access).
+  exportGuestData: (guestId: GuestId) ->
+   (variant {
+      err: GuestError;
+      ok: PrivacyExport;
+    }) query;
+  /// Export the caller's venue guest list as CSV (owner or manager only).
+  exportGuestsCsv: () -> (variant {
+                            err: GuestError;
+                            ok: text;
+                          }) query;
+  /// Finish a booking from the floor view.
+  finishBooking: (bookingId: BookingId) ->
+   (variant {
+      err: FloorError;
+      ok: Booking;
+    });
+  getApiDoc: () -> (text) query;
+  getAvailability: (date: text, partySize: nat) -> (opt Availability) query;
+  getBooking: (bookingId: BookingId) -> (opt BookingView) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getEmailTemplate: (venueId: VenueId, kind: TemplateKind, language:
+   Language) -> (EmailTemplate);
+  /// Rooms and tables of the caller's venue, for the floor plan editor.
+  getFloorPlan: () -> (FloorPlan) query;
+  /// Live floor view for a date ("YYYY-MM-DD") and service label.
+  getFloorView: (date: text, "service": text) -> (FloorView) query;
+  /// A guest of the caller's venue with their booking history.
+  getGuestProfile: (guestId: GuestId) -> (opt GuestProfile) query;
+  getMyRole: (venueId: VenueId) -> (opt TeamRole) query;
+  getOnboarding: (venueId: VenueId) -> (OnboardingState) query;
+  getPublicAvailability: (slug: text, date: text, partySize: nat) ->
+   (opt Availability) query;
+  getPublicBooking: (token: text) -> (opt PublicManageView) query;
+  getPublicVenuePage: (slug: text) -> (opt PublicVenuePage) query;
+  getReminderLog: (bookingId: BookingId) -> (opt ReminderLog);
+  getVenue: (venueId: VenueId) -> (opt Venue) query;
+  /// Import guests from CSV with a caller-supplied column mapping (owner or manager only).
+  importGuestsCsv: (csv: text, mapping: ColumnMapping) ->
+   (variant {
+      err: GuestError;
+      ok: ImportResult;
+    });
+  inviteMember: (venueId: VenueId, email: text, role: TeamRole) ->
+   (TeamInvite);
+  isCallerAdmin: () -> (bool) query;
+  isSlugAvailable: (slug: text) -> (bool) query;
+  listBookingsForDate: (date: text) -> (vec BookingView) query;
+  listEmailTemplates: (venueId: VenueId) -> (vec EmailTemplate);
+  /// Searchable guest list of the caller's venue, with filters.
+  listGuests: (filters: GuestFilters) -> (vec Guest) query;
+  listMyVenues: () -> (vec Venue) query;
+  listRecentAudit: (venueId: VenueId, limit: nat) -> (vec AuditEntry) query;
+  listTeamInvites: (venueId: VenueId) -> (vec TeamInvite) query;
+  listTeamMembers: (venueId: VenueId) -> (vec TeamMember) query;
+  /// Merge a duplicate guest into the kept one, moving its bookings (owner or manager only).
+  mergeGuests: (keepId: GuestId, mergeId: GuestId) ->
+   (variant {
+      err: GuestError;
+      ok: MergeResult;
+    });
+  modifyBooking: (bookingId: BookingId, input: ModifyInput) ->
+   (variant {
+      err: BookingError;
+      ok: BookingView;
+    });
+  modifyPublicBooking: (token: text, partySize: opt nat, startAt:
+   opt Timestamp, notes: opt text) ->
+   (variant {
+      err: BookingError;
+      ok: PublicManageView;
+    });
+  previewEmailTemplate: (id: TemplateId) ->
+   (record {
+      body: text;
+      subject: text;
+    });
+  removeClosure: (venueId: VenueId, date: text) -> (vec ClosureDate);
+  removeMember: (venueId: VenueId, target: principal) -> ();
+  saveOnboarding: (venueId: VenueId, patch: OnboardingPatch) ->
+   (OnboardingState);
+  schema: () -> (text) query;
+  /// Seat a booking from the floor view.
+  seatBooking: (bookingId: BookingId) ->
+   (variant {
+      err: FloorError;
+      ok: Booking;
+    });
+  seedDemoVenue: () -> ();
+  sendBookingEmail: (bookingId: BookingId, kind: TemplateKind) ->
+   (SendResult);
+  sendBookingReminder: (bookingId: BookingId, slot: text) -> (SendResult);
+  sendTestEmail: (id: TemplateId, recipient: text) -> (SendResult);
+  setOpeningHours: (venueId: VenueId, hours: vec DayHours) -> (vec DayHours);
+  setSlug: (venueId: VenueId, slug: text) -> (Venue);
+  updateEmailTemplate: (id: TemplateId, subject: text, body: text) ->
+   (EmailTemplate);
+  /// Update a guest of the caller's venue.
+  updateGuest: (guestId: GuestId, input: GuestInput) ->
+   (variant {
+      err: GuestError;
+      ok: Guest;
+    });
+  /// Update a table of the caller's venue (owner or manager only).
+  updateTable: (tableId: TableId, update: TableUpdate) ->
+   (variant {
+      err: FloorError;
+      ok: RoomTable;
+    });
+  updateVenue: (venueId: VenueId, input: UpdateVenueInput) -> (Venue);
+}

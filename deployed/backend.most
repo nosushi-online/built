@@ -1,0 +1,443 @@
+// Version: 4.0.0
+type AccessControlState__204832294 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__325781230<Principal, UserRole__256279894>
+  };
+type AuditEntry__60967837 =
+  {
+    action : Text;
+    actorPrincipal : Principal;
+    after : ?Text;
+    at : Timestamp__868508278;
+    before : ?Text;
+    entity : Text;
+    id : AuditId__923176417;
+    venueId : VenueId__872908086
+  };
+type AuditEntry__938417449 =
+  {
+    action : Text;
+    actorPrincipal : Principal;
+    after : ?Text;
+    at : Timestamp__771871407;
+    before : ?Text;
+    entity : Text;
+    id : AuditId__970237406;
+    venueId : VenueId__804080163
+  };
+type AuditId__344307203 = Nat;
+type AuditId__923176417 = AuditId__344307203;
+type AuditId__970237406 = Nat;
+type BookingDefaults__18729172 =
+  {
+    defaultTableDurationMinutes : Nat;
+    maxOnlinePartySize : Nat;
+    spaDefaultBufferMinutes : Nat
+  };
+type BookingDefaults__804865528 =
+  {
+    defaultTableDurationMinutes : Nat;
+    maxOnlinePartySize : Nat;
+    spaDefaultBufferMinutes : Nat
+  };
+type BookingId__1054407771 = BookingId__572944220;
+type BookingId__429964979 = BookingId__572944220;
+type BookingId__572944220 = Nat;
+type BookingId__846794533 = Nat;
+type BookingSource__126777458 = {#online; #phone; #staff; #walkIn};
+type BookingSource__39344383 = {#online; #phone; #staff; #walkIn};
+type BookingStatus__278555048 =
+  {#cancelled; #confirmed; #finished; #noShow; #pending; #seated};
+type BookingStatus__866642965 =
+  {#cancelled; #confirmed; #finished; #noShow; #pending; #seated};
+type Booking__1057793126 =
+  {
+    cancelToken : Text;
+    createdAt : Timestamp__972749111;
+    endAt : Timestamp__972749111;
+    guestId : GuestId__503094144;
+    id : BookingId__429964979;
+    notes : ?Text;
+    partySize : Nat;
+    source : BookingSource__39344383;
+    startAt : Timestamp__972749111;
+    status : BookingStatus__866642965;
+    statusHistory : [StatusHistoryEntry__980223347];
+    tableId : ?TableId__384884909;
+    venueId : VenueId__378984830
+  };
+type Booking__854330665 =
+  {
+    cancelToken : Text;
+    createdAt : Timestamp__771871407;
+    endAt : Timestamp__771871407;
+    guestId : GuestId__343783297;
+    id : BookingId__846794533;
+    notes : ?Text;
+    partySize : Nat;
+    source : BookingSource__126777458;
+    startAt : Timestamp__771871407;
+    status : BookingStatus__278555048;
+    statusHistory : [StatusHistoryEntry__735449545];
+    tableId : ?TableId__916495939;
+    venueId : VenueId__804080163
+  };
+type ClosureDate__473562004 = {date : Text; reason : ?Text};
+type ClosureDate__9598632 = {date : Text; reason : ?Text};
+type Counters__138551672 =
+  {
+    var nextAuditId : Nat;
+    var nextBookingId : Nat;
+    var nextGuestId : Nat;
+    var nextTableId : Nat;
+    var nextTemplateId : Nat;
+    var nextVenueId : Nat
+  };
+type Data__665548332<K, V> =
+  {var count : Nat__428897543; kvs : [var ?(K, V)]};
+type DayHours__662966057 =
+  {services : [ServiceWindow__900031999]; weekday : Weekday__893322296};
+type DayHours__828219590 =
+  {services : [ServiceWindow__447346513]; weekday : Weekday__275329659};
+type EmailTemplate__419702815 =
+  {
+    body : Text;
+    id : TemplateId__747819095;
+    kind : TemplateKind__618793427;
+    language : Language__879487106;
+    subject : Text;
+    venueId : VenueId__804080163
+  };
+type EmailTemplate__634425583 =
+  {
+    body : Text;
+    id : TemplateId__262934674;
+    kind : TemplateKind__1045953324;
+    language : Language__353821483;
+    subject : Text;
+    venueId : VenueId__606250548
+  };
+type FloorPosition__505289762 =
+  {
+    height : Nat;
+    rotation : Nat;
+    shape : TableShape__343990024;
+    width : Nat;
+    x : Nat;
+    y : Nat
+  };
+type FloorPosition__520602371 =
+  {
+    height : Nat;
+    rotation : Nat;
+    shape : TableShape__332400248;
+    width : Nat;
+    x : Nat;
+    y : Nat
+  };
+type GuestId__251841337 = GuestId__80888198;
+type GuestId__343783297 = Nat;
+type GuestId__503094144 = GuestId__80888198;
+type GuestId__80888198 = Nat;
+type Guest__33929938 =
+  {
+    allergies : ?Text;
+    createdAt : Timestamp__366497636;
+    email : ?Text;
+    id : GuestId__251841337;
+    lastVisitAt : ?Timestamp__366497636;
+    marketingOptIn : Bool;
+    marketingOptInAt : ?Timestamp__366497636;
+    name : Text;
+    noShowCount : Nat;
+    notes : ?Text;
+    phone : Text;
+    preferences : ?Text;
+    tags : [Text];
+    venueId : VenueId__380394679;
+    vip : Bool;
+    visitCount : Nat
+  };
+type Guest__887833647 =
+  {
+    allergies : ?Text;
+    createdAt : Timestamp__771871407;
+    email : ?Text;
+    id : GuestId__343783297;
+    lastVisitAt : ?Timestamp__771871407;
+    marketingOptIn : Bool;
+    marketingOptInAt : ?Timestamp__771871407;
+    name : Text;
+    noShowCount : Nat;
+    notes : ?Text;
+    phone : Text;
+    preferences : ?Text;
+    tags : [Text];
+    venueId : VenueId__804080163;
+    vip : Bool;
+    visitCount : Nat
+  };
+type Internal__617616743<K, V> =
+  {children : [var ?Node__400757006<K, V>]; data : Data__665548332<K, V>};
+type Language__1013049648 = Language__22065978;
+type Language__22065978 = {#en; #fr};
+type Language__353821483 = Language__22065978;
+type Language__879487106 = {#en; #fr};
+type Leaf__911158411<K, V> = {data : Data__665548332<K, V>};
+type Map__30440623<K, V> =
+  {var root : Node__400757006<K, V>; var size : Nat__428897543};
+type Map__325781230<K, V> = Map__51224778<K, V>;
+type Map__51224778<K, V> = Map__30440623<K, V>;
+type Nat__428897543 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__204832294;
+    auditLog : Map__325781230<AuditId__970237406, AuditEntry__938417449>;
+    bookings : Map__325781230<BookingId__846794533, Booking__854330665>;
+    counters : Counters__138551672;
+    emailTemplates :
+      Map__325781230<TemplateId__747819095, EmailTemplate__419702815>;
+    guests : Map__325781230<GuestId__343783297, Guest__887833647>;
+    reminderLogs :
+      Map__325781230<BookingId__846794533, ReminderLog__339960240>;
+    roomTables : Map__325781230<TableId__916495939, RoomTable__677455462>;
+    teamInvites : Map__325781230<Text, TeamInvite__928954302>;
+    teamMembers : Map__325781230<Principal, TeamMember__54844890>;
+    venues : Map__325781230<VenueId__804080163, Venue__812552638>
+  };
+type Node__400757006<K, V> =
+  {#internal : Internal__617616743<K, V>; #leaf : Leaf__911158411<K, V>};
+type OldActor__512397517 = {};
+type OnboardingState__571079454 =
+  {
+    bookingDefaultsDone : Bool;
+    completedAt : ?Timestamp__553522837;
+    hoursDone : Bool;
+    slugDone : Bool;
+    venueTypeDone : Bool
+  };
+type OnboardingState__801111334 =
+  {
+    bookingDefaultsDone : Bool;
+    completedAt : ?Timestamp__771871407;
+    hoursDone : Bool;
+    slugDone : Bool;
+    venueTypeDone : Bool
+  };
+type ReminderLog__339960240 =
+  {bookingId : BookingId__846794533; sentSlots : [Text]};
+type ReminderLog__784405319 =
+  {bookingId : BookingId__1054407771; sentSlots : [Text]};
+type RoomTable__677455462 =
+  {
+    active : Bool;
+    combinable : Bool;
+    id : TableId__916495939;
+    maxSeats : Nat;
+    minSeats : Nat;
+    name : Text;
+    position : FloorPosition__520602371;
+    room : Text;
+    venueId : VenueId__804080163
+  };
+type RoomTable__906395938 =
+  {
+    active : Bool;
+    combinable : Bool;
+    id : TableId__318332953;
+    maxSeats : Nat;
+    minSeats : Nat;
+    name : Text;
+    position : FloorPosition__505289762;
+    room : Text;
+    venueId : VenueId__549650893
+  };
+type ServiceWindow__447346513 = {closeMinute : Nat; openMinute : Nat};
+type ServiceWindow__900031999 = {closeMinute : Nat; openMinute : Nat};
+type StatusHistoryEntry__735449545 =
+  {
+    at : Timestamp__771871407;
+    by : ?Principal;
+    status : BookingStatus__278555048
+  };
+type StatusHistoryEntry__980223347 =
+  {
+    at : Timestamp__972749111;
+    by : ?Principal;
+    status : BookingStatus__866642965
+  };
+type TableId__318332953 = TableId__859744924;
+type TableId__384884909 = TableId__859744924;
+type TableId__859744924 = Nat;
+type TableId__916495939 = Nat;
+type TableShape__332400248 = {#rectangle; #round; #square};
+type TableShape__343990024 = {#rectangle; #round; #square};
+type TeamInvite__538890892 =
+  {
+    createdAt : Timestamp__553522837;
+    email : Text;
+    invitedBy : Principal;
+    role : TeamRole__855154487;
+    venueId : VenueId__185623622
+  };
+type TeamInvite__928954302 =
+  {
+    createdAt : Timestamp__771871407;
+    email : Text;
+    invitedBy : Principal;
+    role : TeamRole__671651647;
+    venueId : VenueId__804080163
+  };
+type TeamMember__1020273299 =
+  {
+    email : Text;
+    joinedAt : Timestamp__553522837;
+    principal : Principal;
+    role : TeamRole__855154487;
+    venueId : VenueId__185623622
+  };
+type TeamMember__54844890 =
+  {
+    email : Text;
+    joinedAt : Timestamp__771871407;
+    principal : Principal;
+    role : TeamRole__671651647;
+    venueId : VenueId__804080163
+  };
+type TeamRole__671651647 = {#manager; #owner; #staff};
+type TeamRole__855154487 = {#manager; #owner; #staff};
+type TemplateId__141868339 = Nat;
+type TemplateId__262934674 = TemplateId__141868339;
+type TemplateId__747819095 = Nat;
+type TemplateKind__1045953324 =
+  {#cancellation; #confirmation; #modification; #reminder};
+type TemplateKind__618793427 =
+  {#cancellation; #confirmation; #modification; #reminder};
+type Timestamp__301639476 = Int;
+type Timestamp__366497636 = Timestamp__301639476;
+type Timestamp__553522837 = Timestamp__301639476;
+type Timestamp__771871407 = Int;
+type Timestamp__868508278 = Timestamp__301639476;
+type Timestamp__972749111 = Timestamp__301639476;
+type Timezone__772281370 = Timezone__869455119;
+type Timezone__810890596 = Text;
+type Timezone__869455119 = Text;
+type UserRole__256279894 = {#admin; #guest; #user};
+type VenueId__185623622 = VenueId__278562282;
+type VenueId__278562282 = Nat;
+type VenueId__378984830 = VenueId__278562282;
+type VenueId__380394679 = VenueId__278562282;
+type VenueId__549650893 = VenueId__278562282;
+type VenueId__606250548 = VenueId__278562282;
+type VenueId__804080163 = Nat;
+type VenueId__872908086 = VenueId__278562282;
+type VenueTexts__849730215 =
+  {description : Text; language : Language__879487106; name : Text};
+type VenueTexts__87871978 =
+  {description : Text; language : Language__1013049648; name : Text};
+type VenueType__332875584 = {#restaurant; #spa};
+type VenueType__416738164 = VenueType__332875584;
+type VenueType__615100232 = {#restaurant; #spa};
+type Venue__413055161 =
+  {
+    address : Text;
+    bookingDefaults : BookingDefaults__804865528;
+    closures : [ClosureDate__9598632];
+    createdAt : Timestamp__553522837;
+    id : VenueId__185623622;
+    logo : ?Text;
+    name : Text;
+    onboarding : OnboardingState__571079454;
+    openingHours : [DayHours__662966057];
+    phone : Text;
+    publicSlug : Text;
+    texts : [VenueTexts__87871978];
+    timezone : Timezone__772281370;
+    venueType : VenueType__416738164
+  };
+type Venue__812552638 =
+  {
+    address : Text;
+    bookingDefaults : BookingDefaults__18729172;
+    closures : [ClosureDate__473562004];
+    createdAt : Timestamp__771871407;
+    id : VenueId__804080163;
+    logo : ?Text;
+    name : Text;
+    onboarding : OnboardingState__801111334;
+    openingHours : [DayHours__828219590];
+    phone : Text;
+    publicSlug : Text;
+    texts : [VenueTexts__849730215];
+    timezone : Timezone__810890596;
+    venueType : VenueType__615100232
+  };
+type Weekday__275329659 = Nat;
+type Weekday__893322296 = Nat;
+{
+  "00000000_000000" : (_old : OldActor__512397517) -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__325781230<Principal, UserRole__256279894>
+    };
+  stable auditLog :
+    {
+      var root : Node__400757006<AuditId__344307203, AuditEntry__60967837>;
+      var size : Nat__428897543
+    };
+  stable bookings :
+    {
+      var root : Node__400757006<BookingId__572944220, Booking__1057793126>;
+      var size : Nat__428897543
+    };
+  stable counters :
+    {
+      var nextAuditId : Nat;
+      var nextBookingId : Nat;
+      var nextGuestId : Nat;
+      var nextTableId : Nat;
+      var nextTemplateId : Nat;
+      var nextVenueId : Nat
+    };
+  stable emailTemplates :
+    {
+      var root :
+        Node__400757006<TemplateId__141868339, EmailTemplate__634425583>;
+      var size : Nat__428897543
+    };
+  stable guests :
+    {
+      var root : Node__400757006<GuestId__80888198, Guest__33929938>;
+      var size : Nat__428897543
+    };
+  stable reminderLogs :
+    {
+      var root : Node__400757006<BookingId__572944220, ReminderLog__784405319>;
+      var size : Nat__428897543
+    };
+  stable roomTables :
+    {
+      var root : Node__400757006<TableId__859744924, RoomTable__906395938>;
+      var size : Nat__428897543
+    };
+  stable teamInvites :
+    {
+      var root : Node__400757006<Text, TeamInvite__538890892>;
+      var size : Nat__428897543
+    };
+  stable teamMembers :
+    {
+      var root : Node__400757006<Principal, TeamMember__1020273299>;
+      var size : Nat__428897543
+    };
+  stable venues :
+    {
+      var root : Node__400757006<VenueId__278562282, Venue__413055161>;
+      var size : Nat__428897543
+    }
+};
